@@ -26,13 +26,15 @@ export default function CaesarPage() {
 
   return (
     <div className='flex flex-col items-start pl-10'>
-      <hr />
+        <h1 className='text-4xl font-bold'>Caesar Cipher</h1>
         <h1>Enter the Plain Text</h1>
         <Input onChange={plainTextChange}  />
         <h1>Enter Shift Value:</h1>
         <Input onChange={shiftChange}  />
 
+    <h4>Encryption</h4>
     <h5>{encrypted}</h5>
+    <h4>Decryption</h4>
     <h5>{decrypted}</h5>
 
 
