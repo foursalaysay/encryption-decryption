@@ -16,28 +16,38 @@ import {
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "Cipher Home",
     url: "/",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "/inbox",
+    title: "Caesar Cipher Calculator",
+    url: "/caesar",
     icon: Inbox,
   },
   {
-    title: "Calendar",
-    url: "/calendar",
+    title: "Vigenere Cipher",
+    url: "/vigenere",
     icon: Calendar,
   },
   {
-    title: "Search",
-    url: "/search",
+    title: "Playfair",
+    url: "/playfair",
     icon: Search,
   },
   {
-    title: "Settings",
-    url: "/settings",
+    title: "Single Columnar",
+    url: "/single-columnar",
+    icon: Settings,
+  },
+  {
+    title: "Double Columnar",
+    url: "/double-columnar",
+    icon: Settings,
+  },
+  {
+    title: "Advance Encryption Standard",
+    url: "/aes",
     icon: Settings,
   },
 ]

@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
                   <SidebarTrigger className="w-10 h-10 m-5"/>
                   <h5 className="text-md lg:text-2xl font-bold">Encryption and Decryption Processes</h5>
                 </div>
-              {children}~
+              {children}
             </main>
         </SidebarProvider>
       </body>
