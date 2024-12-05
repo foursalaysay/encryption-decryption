@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { encryptAES, decryptAES } from '@/logic/AES';
+import { aesDecrypt, aesEncrypt } from '@/logic/AES';
 
 export default function AESPage() {
   const [plainValue, setPlainValue] = useState(''); // Plain text input
@@ -11,6 +11,7 @@ export default function AESPage() {
   const [encrypted, setEncrypted] = useState(''); // Encrypted result
   const [decrypted, setDecrypted] = useState(''); // Decrypted result
   const [error, setError] = useState(''); // Error message
+  const key128 = "0123456789abcdef";
 
   // Handle input changes for plain text and key
   const handlePlainChange = (event) => {
@@ -28,14 +29,14 @@ export default function AESPage() {
 
   // Encryption action
   const showEncrypted = () => {
-    const result = encryptAES(plainValue, keyValue);
+    const result = aesEncrypt(plainValue, key128);
     setEncrypted(result);
     setDecrypted(''); // Clear the decrypted result for clarity
   };
 
   // Decryption action
   const showDecrypted = () => {
-    const result = decryptAES(plainValue, keyValue);
+    const result = aesDecrypt(plainValue, key128);
     setDecrypted(result);
   };
 
@@ -51,13 +52,13 @@ export default function AESPage() {
         placeholder="Enter plain text..."
       />
 
-      <h2 className="mb-2">Enter the Key:</h2>
+      {/* <h2 className="mb-2">Enter the Key:</h2>
       <Input
         value={keyValue}
         onChange={handleKeyChange}
         className="mb-4"
         placeholder="Enter key..."
-      />
+      /> */}
 
       <div className="flex gap-4">
         <Button onClick={showEncrypted} className="bg-green-500">
