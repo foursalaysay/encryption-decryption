@@ -1,21 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { columnarEncrypt, columnarDecrypt } from '@/logic/DoubleColumnar';
+import { columnarEncrypt, columnarDecrypt, encryptWithFirstKey, decryptWithFirstKey, encryptWithSecondKey, decryptWithSecondKey } from '@/logic/DoubleColumnar';
 
 
 export default function DoubleColumnarPage() {
   const [plainValue, setPlainValue] = useState(''); // Plain text input
-  const [plainValue2, setPlainValue2] = useState('');
+ 
   const [keyValue1, setKeyValue1] = useState(''); // Key input
   const [keyValue2, setKeyValue2] = useState('');
-  const [encrypted, setEncrypted] = useState(''); // Encrypted result
+  const [encrypted2, setEncrypted2] = useState('');
+  const [encrypted, setEncrypted] = useState('');
+  const [decrypted2, setDecrypted2] = useState('');
   const [decrypted, setDecrypted] = useState(''); // Decrypted result
   const [error, setError] = useState(''); // Error message
 
+  const [underscore, setUnderScore] = useState('')
   // Handle input changes for plain text and key
   const handlePlainChange = (event) => {
     setPlainValue(event.target.value);
@@ -23,38 +26,40 @@ export default function DoubleColumnarPage() {
   };
 
   const handleKeyChange1 = (event) => {
-    setKeyValue(event.target.value);
+    setKeyValue1(event.target.value);
     setError(''); // Clear error on input
   };
 
   const handleKeyChange2 = (event) => {
-    setKeyValue(event.target.value);
+    setKeyValue2(event.target.value);
     setError(''); // Clear error on input
   };
-
-  // Validate key for letters only
-  const isKeyValid = (key) => /^[a-zA-Z]+$/.test(key);
 
   // Encryption action
   const showEncrypted = () => {
     
-    const result = doubleColumnarEncrypt(plainValue, keyValue);
+    
+    const result = encryptWithFirstKey(plainValue, keyValue1);
     setEncrypted(result);
+    const printResult = encryptWithSecondKey(result, keyValue2);
+    setEncrypted2(printResult);
+    // The Result is encrypted2
     setDecrypted(''); // Clear the decrypted result for clarity
   };
 
   // Decryption action
   const showDecrypted = () => {
-   
-    if (!isKeyValid(keyValue)) {
-      setError('The key must only contain letters (A-Z or a-z).');
-      return;
-    }
-
-    const result = doubleColumnarDecrypt(plainValue, keyValue);
+    const result = decryptWithFirstKey(plainValue, keyValue2);
     setDecrypted(result);
-  };
-
+    const printResult = decryptWithSecondKey(result, keyValue1);
+    setDecrypted2(printResult);
+    setEncrypted('');
+  
+    // Remove underscores from decrypted2
+    const cleanedString = printResult.replace(/_/g, ' ');  // Remove all underscores
+    setUnderScore(cleanedString);
+  };  
+  
   return (
     <div className="flex flex-col items-start pl-10">
       <h1 className="text-4xl font-bold mb-4">Double Columnar Cipher</h1>
@@ -69,16 +74,16 @@ export default function DoubleColumnarPage() {
 
       <h2 className="mb-2">Enter the Key 1:</h2>
       <Input
-        value={keyValue}
-        onChange={handleKeyChange}
+        value={keyValue1}
+        onChange={handleKeyChange1}
         className="mb-4"
         placeholder="Enter key..."
       />
 
   <h2 className="mb-2">Enter the Key 2:</h2>
       <Input
-        value={keyValue}
-        onChange={handleKeyChange}
+        value={keyValue2}
+        onChange={handleKeyChange2}
         className="mb-4"
         placeholder="Enter key..."
       />
@@ -96,10 +101,15 @@ export default function DoubleColumnarPage() {
 
       <div className="flex flex-col gap-5 mt-8">
         <h4 className="text-2xl font-bold">Encrypted Result:</h4>
-        <p>{encrypted || 'No result yet'}</p>
+        <p>Encrypted Message: (K1) : {encrypted}</p>
+        <p>Encrypted Message: (K2) : {encrypted2 || 'No result yet'}</p>
+        
 
         <h4 className="text-2xl font-bold">Decrypted Result:</h4>
-        <p>{decrypted || 'No result yet'}</p>
+        <p>Decrypted Message: (K2) : {decrypted}</p>
+        <p>Decrypted Message: (K1) : {decrypted2 || 'No result yet'}</p>
+        <p>Plain Text: {underscore}</p>
+        <p></p>
       </div>
     </div>
   );
