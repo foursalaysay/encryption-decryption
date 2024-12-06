@@ -88,11 +88,11 @@ export default function DoubleColumnarPage() {
         placeholder="Enter key..."
       />
 
-      <div className="flex gap-4">
-        <Button onClick={showEncrypted} className="bg-green-500">
+      <div className="flex gap-4 flex-col items-center justify-center">
+        <Button onClick={showEncrypted} className="bg-green-500 w-[400px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-blue-500">
+        <Button onClick={showDecrypted} className="bg-blue-500 w-[400px]">
           Decrypt
         </Button>
       </div>

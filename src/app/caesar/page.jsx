@@ -30,14 +30,6 @@ export default function VigenerePage() {
 
   // Encryption action
   const showEncrypted = () => {
-    if (!plainValue || !keyValue) {
-      setError('Both plain text and key are required.');
-      return;
-    }
-    if (!isKeyValid(keyValue)) {
-      setError('The key must only contain letters (A-Z or a-z).');
-      return;
-    }
 
     const result = caesarEncrypt(plainValue, keyValue);
     setEncrypted(result);
@@ -46,11 +38,6 @@ export default function VigenerePage() {
 
   // Decryption action
   const showDecrypted = () => {
-   
-    if (!isKeyValid(keyValue)) {
-      setError('The key must only contain letters (A-Z or a-z).');
-      return;
-    }
 
     const result = caesarDecrypt(plainValue, keyValue);
     setDecrypted(result);
@@ -76,11 +63,11 @@ export default function VigenerePage() {
         placeholder="Enter key..."
       />
 
-      <div className="flex gap-4">
-        <Button onClick={showEncrypted} className="bg-green-500">
+      <div className="flex gap-4 flex-col items-center justify-center">
+        <Button onClick={showEncrypted} className="bg-green-500 w-[400px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-blue-500">
+        <Button onClick={showDecrypted} className="bg-blue-500 w-[400px]">
           Decrypt
         </Button>
       </div>
