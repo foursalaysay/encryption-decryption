@@ -7,9 +7,7 @@ import { Input } from "@/components/ui/input"
 import { playfairEncrypt, playfairDecrypt, createMatrix, createPairs } from '@/logic/Playfair'
 
 export default function PlayfairPage() {
-  const [plainValue, setPlainValue] = useState('');
-  const [cipherValue, setCipherValue] = useState(
-    '');
+  const [textValue, setTextValue] = useState('');
   const [keyValue, setKeyValue] = useState('');
   const [encrypted, setEncrypted] = useState('');
   const [decrypted, setDecrypted] = useState('');
@@ -17,13 +15,10 @@ export default function PlayfairPage() {
   const [matrix, setMatrix] = useState([]);
   const [letterPairs, setLetterPairs] = useState([]);
   const [currentPairIndex, setCurrentPairIndex] = useState(null); // Track current pair being processed
+  const [isEncrypting, setIsEncrypting] = useState(true); // Flag to determine whether we are encrypting or decrypting
 
-  const handlePlainTextChange = (event) => {
-    setPlainValue(event.target.value);
-  };
-
-  const handleCipherTextChange = (event) => {
-    setCipherValue(event.target.value);
+  const handleTextChange = (event) => {
+    setTextValue(event.target.value);
   };
 
   const handleKeyChange = (event) => {
@@ -33,31 +28,30 @@ export default function PlayfairPage() {
   };
 
   const handleEncrypt = () => {
-    if (!plainValue) {
-      alert('Please enter plaintext for encryption.');
+    if (!textValue || !keyValue) {
+      alert('Please enter text and key for encryption.');
       return;
     }
-    setOriginalPlaintext(plainValue.trim());
-    const pairs = createPairs(plainValue); // Create pairs from plaintext
+    setOriginalPlaintext(textValue.trim());
+    const pairs = createPairs(textValue); // Create pairs from plaintext
     setLetterPairs(pairs);
-    const encryptedText = playfairEncrypt(plainValue, keyValue);
+    const encryptedText = playfairEncrypt(textValue, keyValue);
     setEncrypted(encryptedText);
-    setCipherValue('');
+    setDecrypted(''); // Reset decrypted value
   };
 
   const handleDecrypt = () => {
-    if (!cipherValue) {
-      alert('Please enter ciphertext for decryption.');
+    if (!textValue || !keyValue) {
+      alert('Please enter text and key for decryption.');
       return;
     }
-    const decryptedText = playfairDecrypt(cipherValue, keyValue);
+    const decryptedText = playfairDecrypt(textValue, keyValue);
     setDecrypted(decryptedText);
-    setPlainValue('');
+    setEncrypted(''); // Reset encrypted value
   };
 
   const handleRefresh = () => {
-    setPlainValue('');
-    setCipherValue('');
+    setTextValue('');
     setKeyValue('');
     setEncrypted('');
     setDecrypted('');
@@ -81,22 +75,21 @@ export default function PlayfairPage() {
   };
 
   return (
-    <div className='flex flex-col items-start pl-10'>
+    <div className='flex flex-col p-5 gap-5'>
       <h1 className='text-4xl font-bold'>Playfair Cipher</h1>
 
-      <h1>Enter Plaintext (for Encryption):</h1>
-      <Input value={plainValue} onChange={handlePlainTextChange} />
-
-      <h1>Enter Ciphertext (for Decryption):</h1>
-      <Input value={cipherValue} onChange={handleCipherTextChange} />
-
-      <h1>Enter Key:</h1>
-      <Input value={keyValue} onChange={handleKeyChange} />
-
-      <div className='flex gap-4 mt-4'>
-        <Button onClick={handleEncrypt}>Encrypt</Button>
-        <Button onClick={handleDecrypt}>Decrypt</Button>
-        <Button onClick={handleRefresh} className="bg-red-500 text-white">Refresh</Button>
+      <div className='flex flex-col gap-2'>
+        <h1>Enter Text:</h1>
+        <Input value={textValue} onChange={handleTextChange} />
+      </div>
+      <div className='flex flex-col gap-2'>
+        <h1>Enter Key:</h1>
+        <Input value={keyValue} onChange={handleKeyChange} />
+      </div>
+      <div className='flex flex-col gap-2 mt-4'>
+        <Button onClick={handleEncrypt} className="bg-black text-white w-[340px]">Encrypt</Button>
+        <Button onClick={handleDecrypt} className="bg-black text-white w-[340px]">Decrypt</Button>
+        <Button onClick={handleRefresh} className="bg-black text-white w-[340px]">Refresh</Button>
       </div>
 
       {matrix.length > 0 && (
@@ -123,15 +116,13 @@ export default function PlayfairPage() {
 
       {letterPairs.length > 0 && (
         <div className='mt-4'>
-          <h4 className='font-bold'>Plaintext Split into Pairs:</h4>
+          <h4 className='font-bold'>Text Split into Pairs:</h4>
           <ul className='flex gap-2'>
             {letterPairs.map((pair, index) => (
               <li
                 key={index}
                 onClick={() => handlePairClick(index)}
-                className={`cursor-pointer p-2 border rounded ${
-                  index === currentPairIndex ? 'bg-gray-200' : ''
-                }`}
+                className={`cursor-pointer p-2 border rounded ${index === currentPairIndex ? 'bg-gray-200' : ''}`}
               >
                 {pair.join('')}
               </li>

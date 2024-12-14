@@ -61,38 +61,38 @@ export default function DoubleColumnarPage() {
   };  
   
   return (
-    <div className="flex flex-col items-start pl-10">
-      <h1 className="text-4xl font-bold mb-4">Double Columnar Cipher</h1>
+    <div className="flex flex-col p-5">
+      <h1 className="text-4xl font-bold mb-4">Double Columnar</h1>
 
-      <h2 className="mb-2">Enter the Plain Text:</h2>
+      <h2 className="mb-2 text-sm">Enter the Plain Text:</h2>
       <Input
         value={plainValue}
         onChange={handlePlainChange}
-        className="mb-4"
+        className="mb-4 text-sm"
         placeholder="Enter plain text..."
       />
 
-      <h2 className="mb-2">Enter the Key 1:</h2>
+      <h2 className="mb-2 text-sm">Enter the Key 1:</h2>
       <Input
         value={keyValue1}
         onChange={handleKeyChange1}
-        className="mb-4"
+        className="mb-4 text-sm"
         placeholder="Enter key..."
       />
 
-  <h2 className="mb-2">Enter the Key 2:</h2>
+  <h2 className="mb-2 text-sm">Enter the Key 2:</h2>
       <Input
         value={keyValue2}
         onChange={handleKeyChange2}
-        className="mb-4"
+        className="mb-4 text-sm"
         placeholder="Enter key..."
       />
 
       <div className="flex gap-4 flex-col items-center justify-center">
-        <Button onClick={showEncrypted} className="bg-green-500 w-[400px]">
+        <Button onClick={showEncrypted} className="bg-black text-white w-[340px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-blue-500 w-[400px]">
+        <Button onClick={showDecrypted} className="bg-black text-white w-[340px]">
           Decrypt
         </Button>
       </div>
@@ -102,12 +102,12 @@ export default function DoubleColumnarPage() {
       <div className="flex flex-col gap-5 mt-8">
         <h4 className="text-2xl font-bold">Encrypted Result:</h4>
         <p>Encrypted Message: (K1) : {encrypted}</p>
-        <p>Encrypted Message: (K2) : {encrypted2 || 'No result yet'}</p>
+        <p>Encrypted Message: (K2) : {encrypted2}</p>
         
 
         <h4 className="text-2xl font-bold">Decrypted Result:</h4>
         <p>Decrypted Message: (K2) : {decrypted}</p>
-        <p>Decrypted Message: (K1) : {decrypted2 || 'No result yet'}</p>
+        <p>Decrypted Message: (K1) : {decrypted2}</p>
         <p>Plain Text: {underscore}</p>
         <p></p>
       </div>

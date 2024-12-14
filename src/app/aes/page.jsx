@@ -41,7 +41,7 @@ export default function AESPage() {
   };
 
   return (
-    <div className="flex flex-col py-5">
+    <div className="flex flex-col p-5">
       <h1 className="text-4xl font-bold mb-4">AES Cipher</h1>
 
       <h2 className="mb-2">Enter the Plain Text:</h2>
@@ -60,11 +60,11 @@ export default function AESPage() {
         placeholder="Enter key..."
       /> */}
 
-      <div className="flex gap-4">
-        <Button onClick={showEncrypted} className="bg-green-500">
+      <div className="flex flex-col  gap-4">
+        <Button onClick={showEncrypted} className="bg-black text-white w-[340px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-blue-500">
+        <Button onClick={showDecrypted} className="bg-black text-white w-[340px]">
           Decrypt
         </Button>
       </div>

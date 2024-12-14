@@ -44,30 +44,30 @@ export default function VigenerePage() {
   };
 
   return (
-    <div className="flex flex-col items-start pl-10">
-      <h1 className="text-4xl font-bold mb-4">Single Columnar Cipher</h1>
+    <div className="flex flex-col p-5">
+      <h1 className="text-4xl font-bold mb-4">Single Columnar</h1>
 
-      <h2 className="mb-2">Enter the Plain Text:</h2>
+      <h2 className="mb-2 text-sm">Enter the Plain Text:</h2>
       <Input
         value={plainValue}
         onChange={handlePlainChange}
-        className="mb-4"
+        className="mb-4 text-sm"
         placeholder="Enter plain text..."
       />
 
-      <h2 className="mb-2">Enter the Key:</h2>
+      <h2 className="mb-2 text-sm">Enter the Key:</h2>
       <Input
         value={keyValue}
         onChange={handleKeyChange}
-        className="mb-4"
+        className="mb-4 text-sm"
         placeholder="Enter key..."
       />
 
       <div className="flex gap-4 flex-col items-center justify-center">
-        <Button onClick={showEncrypted} className="bg-black text-white w-[500px]">
+        <Button onClick={showEncrypted} className="bg-black text-white w-[340px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-black text-white w-[500px]">
+        <Button onClick={showDecrypted} className="bg-black text-white w-[340px]">
           Decrypt
         </Button>
       </div>
