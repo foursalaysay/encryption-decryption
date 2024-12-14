@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { caesarDecrypt, caesarEncrypt } from '@/logic/CaesarLogic';
+import { Separator } from '@/components/ui/separator';
 
 
 export default function VigenerePage() {
@@ -25,54 +26,49 @@ export default function VigenerePage() {
     setError(''); // Clear error on input
   };
 
-  // Validate key for letters only
-  const isKeyValid = (key) => /^[a-zA-Z]+$/.test(key);
-
-  // Encryption action
   const showEncrypted = () => {
 
     const result = caesarEncrypt(plainValue, keyValue);
     setEncrypted(result);
-    setDecrypted(''); // Clear the decrypted result for clarity
+    setDecrypted(''); 
   };
 
-  // Decryption action
   const showDecrypted = () => {
-
     const result = caesarDecrypt(plainValue, keyValue);
     setDecrypted(result);
   };
 
   return (
-    <div className="flex flex-col items-start pl-10">
+    <div className="flex flex-col items-start px-5 py-5">
       <h1 className="text-4xl font-bold mb-4">Caesar Cipher</h1>
+      <Separator />
 
-      <h2 className="mb-2">Enter the Plain Text:</h2>
+      <h2 className="my-2 text-sm">Enter the Plain Text:</h2>
       <Input
         value={plainValue}
         onChange={handlePlainChange}
-        className="mb-4"
+        className="mb-4 text-sm w-[340px]"
         placeholder="Enter plain text..."
       />
 
-      <h2 className="mb-2">Enter the Key:</h2>
+      <h2 className="mb-2 text-sm">Enter the Key:</h2>
       <Input
         value={keyValue}
         onChange={handleKeyChange}
-        className="mb-4"
+        className="mb-4 text-sm w-[340px]"
         placeholder="Enter key..."
       />
 
-      <div className="flex gap-4 flex-col items-center justify-center">
-        <Button onClick={showEncrypted} className="bg-black text-white w-[500px]">
+      <div className="flex flex-col gap-4 items-center justify-center mb-5">
+        <Button onClick={showEncrypted} className="bg-black text-white w-[340px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-black text-white w-[500px]">
+        <Button onClick={showDecrypted} className="bg-black text-white w-[340px]">
           Decrypt
         </Button>
       </div>
 
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+      <Separator />
 
       <div className="flex flex-col gap-5 mt-8">
         <h4 className="text-2xl font-bold">Encrypted Result:</h4>

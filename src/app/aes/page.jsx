@@ -41,7 +41,7 @@ export default function AESPage() {
   };
 
   return (
-    <div className="flex flex-col items-start pl-10">
+    <div className="flex flex-col py-5">
       <h1 className="text-4xl font-bold mb-4">AES Cipher</h1>
 
       <h2 className="mb-2">Enter the Plain Text:</h2>
