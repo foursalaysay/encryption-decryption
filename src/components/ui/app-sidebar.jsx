@@ -16,11 +16,6 @@ import {
 // Menu items.
 const items = [
   {
-    title: "Cipher Home",
-    url: "/",
-    icon: Home,
-  },
-  {
     title: "Caesar Cipher Calculator",
     url: "/caesar",
     icon: Inbox,

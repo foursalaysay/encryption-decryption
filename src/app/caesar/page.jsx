@@ -64,10 +64,10 @@ export default function VigenerePage() {
       />
 
       <div className="flex gap-4 flex-col items-center justify-center">
-        <Button onClick={showEncrypted} className="bg-green-500 w-[400px]">
+        <Button onClick={showEncrypted} className="bg-black text-white w-[500px]">
           Encrypt
         </Button>
-        <Button onClick={showDecrypted} className="bg-blue-500 w-[400px]">
+        <Button onClick={showDecrypted} className="bg-black text-white w-[500px]">
           Decrypt
         </Button>
       </div>
